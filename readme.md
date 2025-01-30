@@ -1,3 +1,6 @@
+get into the app directory
+- cd "C:\Users\miguel_montanez1\OneDrive - EPAM\EPAM\certifications\React-app\blog-backend"
+
 running the app:
 - npm run dev
 

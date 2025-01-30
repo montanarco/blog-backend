@@ -14,7 +14,7 @@ router.get('/:name', async (req, res) => {
     if (article) {
         res.json(article);
     } else {
-        res.sendStatus(404).send(ARTICLE_404);
+        res.status(404).send(ARTICLE_404);
     }
 });
 
@@ -26,9 +26,9 @@ router.put('/:name/upvote',
         const article = await ArticlesService.findArticleByName(name);
 
         if(article){
-            res.send(`the ${name} article has: ${article.upvotes} !!!`);
+            res.send(article);
         }else{
-            res.sendStatus(404).send(ARTICLE_404);
+            res.status(404).send(ARTICLE_404);
         }
         
 });
@@ -42,9 +42,9 @@ router.post('/:name/comments',
         const article = await ArticlesService.findArticleByName(name);
 
         if(article){
-            res.status(200).send(article.comments);
+            res.status(200).send(article);
         }else{
-            res.sendStatus(404).send(ARTICLE_404);
+            res.status(404).send(ARTICLE_404);
         }
         
 }); 
@@ -57,7 +57,7 @@ router.get('/:name/comments',
         if(article){
             res.send(article.comments);
         }else{
-            res.sendStatus(404).send(ARTICLE_404);
+            res.status(404).send(ARTICLE_404);
         }
         
 });
