@@ -3,6 +3,8 @@ const router = express.Router();
 
 import * as ArticlesService from '../services/articlesService.js'
 
+const ARTICLE_404 = 'Article not found';
+
 // Route to get an article by name
 router.get('/:name', async (req, res) => {
     const { name } = req.params;
@@ -12,7 +14,7 @@ router.get('/:name', async (req, res) => {
     if (article) {
         res.json(article);
     } else {
-        res.status(404).send('Article not found');
+        res.sendStatus(404).send(ARTICLE_404);
     }
 });
 
@@ -24,10 +26,9 @@ router.put('/:name/upvote',
         const article = await ArticlesService.findArticleByName(name);
 
         if(article){
-            console.log('article votes: ', article.upvotes);
             res.send(`the ${name} article has: ${article.upvotes} !!!`);
         }else{
-            res.send("article not found!");
+            res.sendStatus(404).send(ARTICLE_404);
         }
         
 });
@@ -43,7 +44,7 @@ router.post('/:name/comments',
         if(article){
             res.status(200).send(article.comments);
         }else{
-            res.sendStatus(404).send("article not found!");
+            res.sendStatus(404).send(ARTICLE_404);
         }
         
 }); 
@@ -56,7 +57,7 @@ router.get('/:name/comments',
         if(article){
             res.send(article.comments);
         }else{
-            res.send("article not found!");
+            res.sendStatus(404).send(ARTICLE_404);
         }
         
 });
