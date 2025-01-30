@@ -22,7 +22,7 @@ router.put('/:name/upvote',
     async (req,res)=>{
         const { name } = req.params;    
 
-        ArticlesService.upvoteArticleByName(name)
+        await ArticlesService.upvoteArticleByName(name)
         const article = await ArticlesService.findArticleByName(name);
 
         if(article){
@@ -38,7 +38,7 @@ router.post('/:name/comments',
         const { name } = req.params;
         const { postedBy, text } = req.body;
 
-        ArticlesService.addCommentByName(name, { postedBy, text });
+        await ArticlesService.addCommentByName(name, { postedBy, text });
         const article = await ArticlesService.findArticleByName(name);
 
         if(article){
