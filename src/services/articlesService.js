@@ -12,9 +12,10 @@ async function findArticleByName(name) {
     return await db.collection(ARTICLE_COLLECTION).findOne({ name });
 }
 
-async function upvoteArticleByName(name){
+async function upvoteArticleByName(name, uid){
     await db.collection(ARTICLE_COLLECTION).updateOne({ name }, {
-        $inc: {upvotes: 1}
+        $inc:  {upvotes: 1},
+        $push: { upvotesIds: uid},
     });
 }
 
